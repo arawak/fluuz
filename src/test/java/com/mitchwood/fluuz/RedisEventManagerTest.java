@@ -11,12 +11,11 @@ import org.springframework.cache.concurrent.ConcurrentMapCache;
 
 public class RedisEventManagerTest {
 
-    static RedisEventManager v;
+    static RedisEventManager eventManager;
 
     @BeforeClass
     public static void setup() {
-        //v = new RedisEventManager("lchu-dvco-xdo1", 6379);
-        v = new RedisEventManager("localhost", 6379);
+        eventManager = new RedisEventManager("localhost", 6379);
     }
 
     @Test
@@ -24,11 +23,11 @@ public class RedisEventManagerTest {
         Cache proxy = new ConcurrentMapCache("foo");
         proxy.put("bar", "value");
         proxy.put("baz", "value");
-        FluuzCache fluuzCache = new FluuzCache(v, proxy);
-        v.register(fluuzCache);
+        FluuzCache fluuzCache = new FluuzCache(eventManager, proxy);
+        eventManager.register(fluuzCache);
         Thread.sleep(2000);
 
-        v.evict("foo", "bar");
+        eventManager.evict("foo", "bar");
 
         Thread.sleep(2000);
 
@@ -43,7 +42,7 @@ public class RedisEventManagerTest {
     @AfterClass
     public static void cleanup() {
         try {
-            v.close();
+            eventManager.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

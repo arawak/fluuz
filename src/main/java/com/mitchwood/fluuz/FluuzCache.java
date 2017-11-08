@@ -18,6 +18,7 @@ public class FluuzCache implements Cache {
     public FluuzCache(EventManager eventManager, Cache proxy) {
         Assert.notNull(proxy, "null proxy");
         this.proxy = proxy;
+        this.eventManager = eventManager;
         eventManager.register(this);
     }
 

@@ -14,8 +14,8 @@ public class FluuzCacheManager implements CacheManager {
     final ConcurrentHashMap<String, FluuzCache> cacheMap = new ConcurrentHashMap<String, FluuzCache>();
 
     /**
-     * Construct a dynamic ConcurrentMapCacheManager, lazily creating cache
-     * instances as they are being requested.
+     * Construct a dynamic {@link FluuzCacheManager} backed by a {@link ConcurrentMapCacheManager}, 
+     * lazily creating cache instances as they are being requested.
      */
     public FluuzCacheManager(EventManager eventManager) {
         this.eventManager = eventManager;
@@ -23,7 +23,7 @@ public class FluuzCacheManager implements CacheManager {
     }
 
     /**
-     * Construct a static ConcurrentMapCacheManager, managing caches for the
+     * Construct a static {@link FluuzCacheManager}, managing caches for the
      * specified cache names only.
      */
     public FluuzCacheManager(EventManager eventManager, CacheManager cacheManager) {
