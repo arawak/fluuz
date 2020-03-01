@@ -11,6 +11,7 @@ import org.springframework.cache.Cache;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -35,11 +36,11 @@ public class RedisEventManager implements EventManager, Closeable {
 
     Map<String, FluuzCache> cacheMap = new ConcurrentHashMap<String, FluuzCache>();
 
-    public RedisEventManager(String host) {
+    public RedisEventManager(@NonNull String host) {
         this(host, 6379);
     }
 
-    public RedisEventManager(String host, int port) {
+    public RedisEventManager(@NonNull String host, int port) {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         pool = new JedisPool(poolConfig, host, port, 0);
         subscriberJedis = pool.getResource();
